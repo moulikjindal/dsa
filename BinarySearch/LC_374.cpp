@@ -10,7 +10,19 @@
 class Solution {
 public:
     int guessNumber(int n) {
-        string foundatleft = "011"
-        
+        int left = 1, right = n;
+        while (left <= right) {
+            int mid = left + (right - left) / 2; // To prevent overflow
+            
+            int result = guess(mid);
+            if (result == 0) {
+                return mid; // Found the number
+            } else if (result < 0) {
+                right = mid - 1; // The picked number is lower
+            } else {
+                left = mid + 1; // The picked number is higher
+            }
+        }
+        return -1; // This line should never be reached if the input is valid
     }
 };
