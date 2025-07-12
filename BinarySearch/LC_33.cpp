@@ -23,14 +23,15 @@ public:
         }
         //now we have to find the pivot point
         int left = 0, right = nums.size() - 1;
-        while (left < right) {
+        while (nums[left] > nums[right]) {
             int mid = left + (right - left) / 2;
-            if (nums[mid] > nums[right]) {
-                // Pivot is in the right half
-                left = mid + 1;
+            // Check if mid is the pivot
+            if (mid < right && nums[mid] > nums[right]) {
+                left = mid + 1; // Move to the right side
+            } else if (mid > left && nums[mid] < nums[left]) {
+                right = mid; // Move to the left side
             } else {
-                // Pivot is in the left half
-                right = mid;
+                break; // Found the pivot
             }
         }
         // left is now the index of the smallest element (pivot)
